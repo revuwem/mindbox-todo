@@ -22,6 +22,9 @@ const TodoClear: React.FC<Props> = ({ onDeleteCompleted }) => {
       variant={isDeleteRequested ? "contained" : "text"}
       color="error"
       onClick={handleDeleteCompleted}
+      sx={{
+        whiteSpace: "nowrap",
+      }}
     >
       {isDeleteRequested ? "Submit clear" : "Clear completed"}
     </Button>

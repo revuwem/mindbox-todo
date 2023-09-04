@@ -3,6 +3,7 @@ import { Container, Box, Typography, List } from "@mui/material";
 import TodoInput from "@/components/TodoInput";
 import TodoListItem from "@/components/TodoListItem";
 import TodoFooter from "@/components/TodoFooter";
+import TodoUIMessage from "@/components/TodoUIMessage";
 
 export type StatusFilter = "all" | "active" | "done";
 
@@ -48,34 +49,34 @@ const TodoList = () => {
 
   return (
     <Container>
-      <Typography variant="h4" component="h2" marginBottom={3}>
-        Todo List
-      </Typography>
-      <Box>
-        <TodoInput onSubmit={onAddTodoItem} />
-        <TodoFooter
-          activeStatus={activeStatus}
-          onChangeStatus={setActiveStatus}
-          onDeleteCompleted={onDeleteCompleted}
-          activeCount={activeCount}
-        />
-        {isListEmpty && (
-          <Typography component="p">Your list is empty</Typography>
-        )}
-        {isNoItemsFound && (
-          <Typography component="p">No items found</Typography>
-        )}
-        {!isNoItemsFound && (
-          <List>
-            {displayedItems.map((item) => (
-              <TodoListItem
-                key={item.name}
-                item={item}
-                onChangeStatus={onChangeTodoStatus}
-              />
-            ))}
-          </List>
-        )}
+      <Box paddingTop={7} paddingBottom={2}>
+        <Typography variant="h4" component="h2" marginBottom={3}>
+          Todo List
+        </Typography>
+        <Box>
+          <TodoInput onSubmit={onAddTodoItem} />
+          <TodoFooter
+            activeStatus={activeStatus}
+            onChangeStatus={setActiveStatus}
+            onDeleteCompleted={onDeleteCompleted}
+            activeCount={activeCount}
+          />
+          {isListEmpty && (
+            <TodoUIMessage>Add a new task to start with</TodoUIMessage>
+          )}
+          {isNoItemsFound && <TodoUIMessage>No items found</TodoUIMessage>}
+          {!isNoItemsFound && (
+            <List disablePadding>
+              {displayedItems.map((item) => (
+                <TodoListItem
+                  key={item.name}
+                  item={item}
+                  onChangeStatus={onChangeTodoStatus}
+                />
+              ))}
+            </List>
+          )}
+        </Box>
       </Box>
     </Container>
   );

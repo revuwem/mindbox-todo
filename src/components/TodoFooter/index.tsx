@@ -23,13 +23,13 @@ const TodoFooter: React.FC<Props> = ({
       alignItems="center"
       gap={2}
       sx={{
-        padding: "0.5rem 2rem",
+        padding: "1.5rem 1rem",
       }}
     >
-      <Grid item xs={2}>
-        {activeCount > 0 && (
-          <Typography component="p">{activeCount} items left</Typography>
-        )}
+      <Grid item xs="auto" md={2}>
+        <Typography component="p" noWrap>
+          {activeCount} items left
+        </Typography>
       </Grid>
       <Grid item>
         <TodoStatusFilter
@@ -37,7 +37,7 @@ const TodoFooter: React.FC<Props> = ({
           onChangeStatus={onChangeStatus}
         />
       </Grid>
-      <Grid container item xs={2} justifyContent="end">
+      <Grid item xs="auto" md={1.5}>
         <TodoClear onDeleteCompleted={onDeleteCompleted} />
       </Grid>
     </Grid>

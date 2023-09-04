@@ -17,8 +17,13 @@ const TodoListItem: React.FC<Props> = ({ item, onChangeStatus }) => {
   };
 
   return (
-    <ListItem>
-      <ListItemButton role={undefined} dense onClick={handleChangeStatus}>
+    <ListItem disablePadding>
+      <ListItemButton
+        role={undefined}
+        dense
+        disableRipple
+        onClick={handleChangeStatus}
+      >
         <ListItemIcon>
           <Checkbox
             checked={item.done}
