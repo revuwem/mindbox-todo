@@ -1,6 +1,19 @@
+import { type StatusFilter } from "@/components/TodoList";
 import { Button, ButtonGroup, Grid, Typography } from "@mui/material";
 
-const TodoFooter = () => {
+type Props = {
+  activeStatus: StatusFilter;
+  onChangeStatus: (s: StatusFilter) => void;
+};
+
+const TodoFooter: React.FC<Props> = ({ activeStatus, onChangeStatus }) => {
+  const handleChangeStatus = (status: StatusFilter) => {
+    onChangeStatus(status);
+  };
+
+  const getStatusButtonVariant = (status: StatusFilter) =>
+    activeStatus === status ? "contained" : "outlined";
+
   return (
     <Grid
       container
@@ -19,9 +32,24 @@ const TodoFooter = () => {
           variant="outlined"
           aria-label="outlined primary button group"
         >
-          <Button>All</Button>
-          <Button>Active</Button>
-          <Button>Done</Button>
+          <Button
+            variant={getStatusButtonVariant("all")}
+            onClick={() => handleChangeStatus("all")}
+          >
+            All
+          </Button>
+          <Button
+            variant={getStatusButtonVariant("active")}
+            onClick={() => handleChangeStatus("active")}
+          >
+            Active
+          </Button>
+          <Button
+            variant={getStatusButtonVariant("done")}
+            onClick={() => handleChangeStatus("done")}
+          >
+            Done
+          </Button>
         </ButtonGroup>
       </Grid>
       <Grid item>
