@@ -21,6 +21,10 @@ const TodoList = () => {
     }
   }, [todoList, activeStatus]);
 
+  const activeCount = useMemo(() => {
+    return todoList.filter((item) => !item.done).length;
+  }, [todoList]);
+
   const onAddTodoItem = (name: string) => {
     setTodoList([...todoList, { name, done: false }]);
   };
@@ -53,6 +57,7 @@ const TodoList = () => {
           activeStatus={activeStatus}
           onChangeStatus={setActiveStatus}
           onDeleteCompleted={onDeleteCompleted}
+          activeCount={activeCount}
         />
         {isListEmpty && (
           <Typography component="p">Your list is empty</Typography>
