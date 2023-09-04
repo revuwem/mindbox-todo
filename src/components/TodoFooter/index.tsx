@@ -4,15 +4,24 @@ import { Button, ButtonGroup, Grid, Typography } from "@mui/material";
 type Props = {
   activeStatus: StatusFilter;
   onChangeStatus: (s: StatusFilter) => void;
+  onDeleteCompleted: () => void;
 };
 
-const TodoFooter: React.FC<Props> = ({ activeStatus, onChangeStatus }) => {
+const TodoFooter: React.FC<Props> = ({
+  activeStatus,
+  onChangeStatus,
+  onDeleteCompleted,
+}) => {
   const handleChangeStatus = (status: StatusFilter) => {
     onChangeStatus(status);
   };
 
   const getStatusButtonVariant = (status: StatusFilter) =>
     activeStatus === status ? "contained" : "outlined";
+
+  const handleDeleteCompleted = () => {
+    onDeleteCompleted();
+  };
 
   return (
     <Grid
@@ -53,7 +62,7 @@ const TodoFooter: React.FC<Props> = ({ activeStatus, onChangeStatus }) => {
         </ButtonGroup>
       </Grid>
       <Grid item>
-        <Button variant="text" color="error">
+        <Button variant="text" color="error" onClick={handleDeleteCompleted}>
           Clear completed
         </Button>
       </Grid>

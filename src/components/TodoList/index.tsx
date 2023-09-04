@@ -34,6 +34,11 @@ const TodoList = () => {
     setTodoList(newTodoList);
   };
 
+  const onDeleteCompleted = () => {
+    const newTodoList = [...todoList].filter((item) => !item.done);
+    setTodoList(newTodoList);
+  };
+
   return (
     <Container>
       <Typography variant="h4" component="h2" marginBottom={3}>
@@ -44,6 +49,7 @@ const TodoList = () => {
         <TodoFooter
           activeStatus={activeStatus}
           onChangeStatus={setActiveStatus}
+          onDeleteCompleted={onDeleteCompleted}
         />
         {todoList.length < 1 && (
           <Typography component="p">Your list is empty</Typography>
