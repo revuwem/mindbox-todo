@@ -1,6 +1,7 @@
-import TodoClear from "@/components/TodoClear";
+import { Grid, Typography } from "@mui/material";
 import { type StatusFilter } from "@/components/TodoList";
-import { Button, ButtonGroup, Grid, Typography } from "@mui/material";
+import TodoStatusFilter from "@/components/TodoStatusFilter";
+import TodoClear from "@/components/TodoClear";
 
 type Props = {
   activeStatus: StatusFilter;
@@ -15,13 +16,6 @@ const TodoFooter: React.FC<Props> = ({
   onDeleteCompleted,
   activeCount,
 }) => {
-  const handleChangeStatus = (status: StatusFilter) => {
-    onChangeStatus(status);
-  };
-
-  const getStatusButtonVariant = (status: StatusFilter) =>
-    activeStatus === status ? "contained" : "outlined";
-
   return (
     <Grid
       container
@@ -38,29 +32,10 @@ const TodoFooter: React.FC<Props> = ({
         )}
       </Grid>
       <Grid item>
-        <ButtonGroup
-          variant="outlined"
-          aria-label="outlined primary button group"
-        >
-          <Button
-            variant={getStatusButtonVariant("all")}
-            onClick={() => handleChangeStatus("all")}
-          >
-            All
-          </Button>
-          <Button
-            variant={getStatusButtonVariant("active")}
-            onClick={() => handleChangeStatus("active")}
-          >
-            Active
-          </Button>
-          <Button
-            variant={getStatusButtonVariant("done")}
-            onClick={() => handleChangeStatus("done")}
-          >
-            Done
-          </Button>
-        </ButtonGroup>
+        <TodoStatusFilter
+          activeStatus={activeStatus}
+          onChangeStatus={onChangeStatus}
+        />
       </Grid>
       <Grid container item xs={2} justifyContent="end">
         <TodoClear onDeleteCompleted={onDeleteCompleted} />
