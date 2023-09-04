@@ -39,6 +39,9 @@ const TodoList = () => {
     setTodoList(newTodoList);
   };
 
+  const isListEmpty = todoList.length === 0;
+  const isNoItemsFound = todoList.length > 0 && displayedItems.length === 0;
+
   return (
     <Container>
       <Typography variant="h4" component="h2" marginBottom={3}>
@@ -51,10 +54,13 @@ const TodoList = () => {
           onChangeStatus={setActiveStatus}
           onDeleteCompleted={onDeleteCompleted}
         />
-        {todoList.length < 1 && (
+        {isListEmpty && (
           <Typography component="p">Your list is empty</Typography>
         )}
-        {todoList && todoList.length > 0 && (
+        {isNoItemsFound && (
+          <Typography component="p">No items found</Typography>
+        )}
+        {!isNoItemsFound && (
           <List>
             {displayedItems.map((item) => (
               <TodoListItem
