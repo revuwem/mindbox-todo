@@ -6,14 +6,30 @@ import {
   ListItemText,
 } from "@mui/material";
 
-const TodoListItem = () => {
+type Props = {
+  item: Task;
+  onChangeStatus: (name: string) => void;
+};
+
+const TodoListItem: React.FC<Props> = ({ item, onChangeStatus }) => {
+  const handleChangeStatus = () => {
+    onChangeStatus(item.name);
+  };
+
   return (
     <ListItem>
-      <ListItemButton role={undefined} dense>
+      <ListItemButton role={undefined} dense onClick={handleChangeStatus}>
         <ListItemIcon>
-          <Checkbox edge="start" tabIndex={-1} disableRipple />
+          <Checkbox
+            checked={item.done}
+            edge="start"
+            tabIndex={-1}
+            disableRipple
+          />
         </ListItemIcon>
-        <ListItemText primary={`Line item`} />
+        <ListItemText>
+          {item.done ? <s>{item.name}</s> : item.name}
+        </ListItemText>
       </ListItemButton>
     </ListItem>
   );
