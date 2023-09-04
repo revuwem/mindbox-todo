@@ -1,3 +1,4 @@
+import TodoClear from "@/components/TodoClear";
 import { type StatusFilter } from "@/components/TodoList";
 import { Button, ButtonGroup, Grid, Typography } from "@mui/material";
 
@@ -20,10 +21,6 @@ const TodoFooter: React.FC<Props> = ({
 
   const getStatusButtonVariant = (status: StatusFilter) =>
     activeStatus === status ? "contained" : "outlined";
-
-  const handleDeleteCompleted = () => {
-    onDeleteCompleted();
-  };
 
   return (
     <Grid
@@ -65,10 +62,8 @@ const TodoFooter: React.FC<Props> = ({
           </Button>
         </ButtonGroup>
       </Grid>
-      <Grid item>
-        <Button variant="text" color="error" onClick={handleDeleteCompleted}>
-          Clear completed
-        </Button>
+      <Grid container item xs={2} justifyContent="end">
+        <TodoClear onDeleteCompleted={onDeleteCompleted} />
       </Grid>
     </Grid>
   );
