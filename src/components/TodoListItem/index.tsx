@@ -8,12 +8,12 @@ import {
 
 type Props = {
   item: Task;
-  onChangeStatus: (name: string) => void;
+  onChangeStatus: (id: number) => void;
 };
 
 const TodoListItem: React.FC<Props> = ({ item, onChangeStatus }) => {
   const handleChangeStatus = () => {
-    onChangeStatus(item.name);
+    onChangeStatus(item.uuid);
   };
 
   return (

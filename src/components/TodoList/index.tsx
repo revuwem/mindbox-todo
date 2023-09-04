@@ -27,13 +27,16 @@ const TodoList = () => {
   }, [todoList]);
 
   const onAddTodoItem = (name: string) => {
-    setTodoList([...todoList, { name, done: false }]);
+    setTodoList([
+      ...todoList,
+      { name, uuid: new Date().getTime(), done: false },
+    ]);
   };
 
-  const onChangeTodoStatus = (name: string) => {
+  const onChangeTodoStatus = (id: number) => {
     const newTodoList = [...todoList];
 
-    const task = newTodoList.findIndex((item) => item.name === name);
+    const task = newTodoList.findIndex((item) => item.uuid === id);
     newTodoList[task].done = !newTodoList[task].done;
 
     setTodoList(newTodoList);
@@ -69,7 +72,7 @@ const TodoList = () => {
             <List disablePadding>
               {displayedItems.map((item) => (
                 <TodoListItem
-                  key={item.name}
+                  key={"todo-" + item.uuid}
                   item={item}
                   onChangeStatus={onChangeTodoStatus}
                 />
