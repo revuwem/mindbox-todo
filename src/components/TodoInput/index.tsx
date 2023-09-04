@@ -1,19 +1,30 @@
+import { useState } from "react";
 import { TextField } from "@mui/material";
 
-const TodoInput = () => {
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+type Props = {
+  onSubmit: (taskName: string) => void;
+};
+
+const TodoInput: React.FC<Props> = ({ onSubmit }) => {
+  const [taskName, setTaskName] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("form submitted");
+    onSubmit(taskName);
+    setTaskName("");
   };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <TextField
         id="todo-input"
         variant="outlined"
         fullWidth
         aria-label="New todo item"
         placeholder="What are your plans for today?"
+        value={taskName}
+        onChange={(e) => setTaskName(e.target.value)}
       />
     </form>
   );
