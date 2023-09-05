@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { StatusFilter } from "@/components/TodoList";
 import type { PayloadAction } from "@reduxjs/toolkit";
+
+export const todoListStatus = ["all", "active", "done"] as const;
+export type TodoListStatus = (typeof todoListStatus)[number];
 
 export interface TodoListState {
   data: Task[];
-  activeStatus: StatusFilter;
+  activeStatus: TodoListStatus;
 }
 
 const initialState: TodoListState = {
