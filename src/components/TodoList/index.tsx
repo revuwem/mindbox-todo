@@ -1,7 +1,7 @@
 import { Container, Box, Typography, List } from "@mui/material";
 import TodoInput from "@/components/TodoInput";
 import TodoListItem from "@/components/TodoListItem";
-import TodoFooter from "@/components/TodoFooter";
+import TodoControls from "@/components/TodoControls";
 import TodoUIMessage from "@/components/TodoUIMessage";
 import { useSelector } from "react-redux";
 import {
@@ -24,7 +24,7 @@ const TodoList = () => {
         </Typography>
         <Box>
           <TodoInput />
-          <TodoFooter />
+          <TodoControls />
           {isListEmpty && (
             <TodoUIMessage>Add a new task to start with</TodoUIMessage>
           )}

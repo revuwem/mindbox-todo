@@ -4,7 +4,7 @@ import TodoClear from "@/components/TodoClear";
 import { useSelector } from "react-redux";
 import { todoListActiveCount } from "@/store/selector/todoSelector";
 
-const TodoFooter = () => {
+const TodoControls = () => {
   const activeCount = useSelector(todoListActiveCount);
 
   return (
@@ -32,4 +32,4 @@ const TodoFooter = () => {
   );
 };
 
-export default TodoFooter;
+export default TodoControls;
