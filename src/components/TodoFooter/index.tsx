@@ -1,21 +1,12 @@
 import { Grid, Typography } from "@mui/material";
-import { type StatusFilter } from "@/components/TodoList";
 import TodoStatusFilter from "@/components/TodoStatusFilter";
 import TodoClear from "@/components/TodoClear";
+import { useSelector } from "react-redux";
+import { todoListActiveCount } from "@/store/selector/todoSelector";
 
-type Props = {
-  activeStatus: StatusFilter;
-  onChangeStatus: (s: StatusFilter) => void;
-  onDeleteCompleted: () => void;
-  activeCount: number;
-};
+const TodoFooter = () => {
+  const activeCount = useSelector(todoListActiveCount);
 
-const TodoFooter: React.FC<Props> = ({
-  activeStatus,
-  onChangeStatus,
-  onDeleteCompleted,
-  activeCount,
-}) => {
   return (
     <Grid
       container
@@ -32,13 +23,10 @@ const TodoFooter: React.FC<Props> = ({
         </Typography>
       </Grid>
       <Grid item>
-        <TodoStatusFilter
-          activeStatus={activeStatus}
-          onChangeStatus={onChangeStatus}
-        />
+        <TodoStatusFilter />
       </Grid>
       <Grid item xs="auto" md={1.5}>
-        <TodoClear onDeleteCompleted={onDeleteCompleted} />
+        <TodoClear />
       </Grid>
     </Grid>
   );

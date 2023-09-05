@@ -1,16 +1,15 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteCompletedTask } from "@/store/slice/todoSlice";
 
-type Props = {
-  onDeleteCompleted: () => void;
-};
-
-const TodoClear: React.FC<Props> = ({ onDeleteCompleted }) => {
+const TodoClear = () => {
   const [isDeleteRequested, setIsDeleteRequested] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const handleDeleteCompleted = () => {
     if (isDeleteRequested) {
-      onDeleteCompleted();
+      dispatch(deleteCompletedTask());
       setIsDeleteRequested(false);
     } else {
       setIsDeleteRequested(true);

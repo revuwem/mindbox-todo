@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addTask } from "@/store/slice/todoSlice";
 
-type Props = {
-  onSubmit: (taskName: string) => void;
-};
-
-const TodoInput: React.FC<Props> = ({ onSubmit }) => {
+const TodoInput = () => {
   const [taskName, setTaskName] = useState<string>("");
+  const dispatch = useDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit(taskName);
+    dispatch(addTask(taskName));
     setTaskName("");
   };
 

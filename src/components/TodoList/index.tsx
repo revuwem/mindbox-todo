@@ -1,54 +1,20 @@
-import { useMemo, useState } from "react";
 import { Container, Box, Typography, List } from "@mui/material";
 import TodoInput from "@/components/TodoInput";
 import TodoListItem from "@/components/TodoListItem";
 import TodoFooter from "@/components/TodoFooter";
 import TodoUIMessage from "@/components/TodoUIMessage";
+import { useSelector } from "react-redux";
+import {
+  isTodoListEmpty,
+  todoListDisplayedItemsSelector,
+} from "@/store/selector/todoSelector";
 
 export type StatusFilter = "all" | "active" | "done";
 
 const TodoList = () => {
-  const [todoList, setTodoList] = useState<Task[]>([]);
-  const [activeStatus, setActiveStatus] = useState<StatusFilter>("all");
-
-  const displayedItems = useMemo(() => {
-    switch (activeStatus) {
-      case "all":
-        return todoList;
-      case "active":
-        return todoList.filter((item) => !item.done);
-      case "done":
-        return todoList.filter((item) => item.done);
-    }
-  }, [todoList, activeStatus]);
-
-  const activeCount = useMemo(() => {
-    return todoList.filter((item) => !item.done).length;
-  }, [todoList]);
-
-  const onAddTodoItem = (name: string) => {
-    setTodoList([
-      ...todoList,
-      { name, uuid: new Date().getTime(), done: false },
-    ]);
-  };
-
-  const onChangeTodoStatus = (id: number) => {
-    const newTodoList = [...todoList];
-
-    const task = newTodoList.findIndex((item) => item.uuid === id);
-    newTodoList[task].done = !newTodoList[task].done;
-
-    setTodoList(newTodoList);
-  };
-
-  const onDeleteCompleted = () => {
-    const newTodoList = [...todoList].filter((item) => !item.done);
-    setTodoList(newTodoList);
-  };
-
-  const isListEmpty = todoList.length === 0;
-  const isNoItemsFound = todoList.length > 0 && displayedItems.length === 0;
+  const displayedItems = useSelector(todoListDisplayedItemsSelector);
+  const isListEmpty = useSelector(isTodoListEmpty);
+  const isNoItemsFound = !isListEmpty && displayedItems.length === 0;
 
   return (
     <Container>
@@ -57,13 +23,8 @@ const TodoList = () => {
           Todo List
         </Typography>
         <Box>
-          <TodoInput onSubmit={onAddTodoItem} />
-          <TodoFooter
-            activeStatus={activeStatus}
-            onChangeStatus={setActiveStatus}
-            onDeleteCompleted={onDeleteCompleted}
-            activeCount={activeCount}
-          />
+          <TodoInput />
+          <TodoFooter />
           {isListEmpty && (
             <TodoUIMessage>Add a new task to start with</TodoUIMessage>
           )}
@@ -71,11 +32,7 @@ const TodoList = () => {
           {!isNoItemsFound && (
             <List disablePadding>
               {displayedItems.map((item) => (
-                <TodoListItem
-                  key={"todo-" + item.uuid}
-                  item={item}
-                  onChangeStatus={onChangeTodoStatus}
-                />
+                <TodoListItem key={"todo-" + item.uuid} item={item} />
               ))}
             </List>
           )}

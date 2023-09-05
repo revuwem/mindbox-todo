@@ -5,15 +5,17 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { changeTaskStatus } from "@/store/slice/todoSlice";
 
 type Props = {
   item: Task;
-  onChangeStatus: (id: number) => void;
 };
 
-const TodoListItem: React.FC<Props> = ({ item, onChangeStatus }) => {
+const TodoListItem: React.FC<Props> = ({ item }) => {
+  const dispatch = useDispatch();
   const handleChangeStatus = () => {
-    onChangeStatus(item.uuid);
+    dispatch(changeTaskStatus(item.uuid));
   };
 
   return (

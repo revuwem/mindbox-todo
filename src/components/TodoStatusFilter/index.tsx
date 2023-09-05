@@ -1,17 +1,15 @@
 import { type StatusFilter } from "@/components/TodoList";
 import { Button, ButtonGroup } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { changeActiveStatus } from "@/store/slice/todoSlice";
+import { todoListActiveStatus } from "@/store/selector/todoSelector";
 
-type Props = {
-  activeStatus: StatusFilter;
-  onChangeStatus: (s: StatusFilter) => void;
-};
+const TodoStatusFilter = () => {
+  const activeStatus = useSelector(todoListActiveStatus);
+  const dispatch = useDispatch();
 
-const TodoStatusFilter: React.FC<Props> = ({
-  activeStatus,
-  onChangeStatus,
-}) => {
   const handleChangeStatus = (status: StatusFilter) => {
-    onChangeStatus(status);
+    dispatch(changeActiveStatus(status));
   };
 
   const getStatusButtonVariant = (status: StatusFilter) =>
