@@ -13,6 +13,7 @@ const TodoClear = () => {
       setIsDeleteRequested(false);
     } else {
       setIsDeleteRequested(true);
+      setTimeout(() => setIsDeleteRequested(false), 5000);
     }
   };
 
