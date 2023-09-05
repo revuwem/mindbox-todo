@@ -1,12 +1,9 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import TodoStatusFilter from "@/components/TodoStatusFilter";
 import TodoClear from "@/components/TodoClear";
-import { useSelector } from "react-redux";
-import { todoListActiveCount } from "@/store/selector/todoSelector";
+import TodoActiveCount from "@/components/TodoActiveCount";
 
 const TodoControls = () => {
-  const activeCount = useSelector(todoListActiveCount);
-
   return (
     <Grid
       container
@@ -18,9 +15,7 @@ const TodoControls = () => {
       }}
     >
       <Grid item xs="auto" md={2}>
-        <Typography component="p" noWrap>
-          {activeCount} items left
-        </Typography>
+        <TodoActiveCount />
       </Grid>
       <Grid item>
         <TodoStatusFilter />
