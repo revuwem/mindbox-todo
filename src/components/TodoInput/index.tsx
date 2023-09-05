@@ -15,12 +15,13 @@ const TodoInput = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} name="new-task-form">
       <TextField
         id="todo-input"
         variant="outlined"
         fullWidth
         aria-label="New todo item"
+        inputProps={{ "data-testid": "todo-input" }}
         placeholder="What are your plans for today?"
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
