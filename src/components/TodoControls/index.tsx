@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import TodoStatusFilter from "@/components/TodoStatusFilter";
-import TodoClear from "@/components/TodoClear";
+import TodoClearCompleted from "@/components/TodoClearCompleted";
 import TodoActiveCount from "@/components/TodoActiveCount";
 
 const TodoControls = () => {
@@ -21,7 +21,7 @@ const TodoControls = () => {
         <TodoStatusFilter />
       </Grid>
       <Grid item xs="auto" md={1.5}>
-        <TodoClear />
+        <TodoClearCompleted />
       </Grid>
     </Grid>
   );

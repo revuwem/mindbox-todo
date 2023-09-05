@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteCompletedTask } from "@/store/slice/todoSlice";
 
-const TodoClear = () => {
+const TodoClearCompleted = () => {
   const [isDeleteRequested, setIsDeleteRequested] = useState<boolean>(false);
   const dispatch = useDispatch();
 
@@ -31,4 +31,4 @@ const TodoClear = () => {
   );
 };
 
-export default TodoClear;
+export default TodoClearCompleted;
